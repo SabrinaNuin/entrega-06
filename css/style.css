@@ -1,0 +1,559 @@
+/* ==========================================================================
+   Mi Portafolio - Hoja de estilos principal
+   Se carga después de Bootstrap: lo complementa y lo adapta a la paleta propia.
+
+   Índice
+   1. Reset global
+   2. Paleta de colores
+   3. Base y grilla maestra
+   4. Tipografía
+   5. Encabezado y navegación (navbar de Bootstrap)
+   6. Presentación (hero)
+   7. Contenedores, secciones y grilla del inicio
+   8. Componentes: tarjetas, etiquetas, botón, galería, acordeón, listas, figuras, contacto
+   9. Pie de página
+   10. Estados interactivos y transiciones
+   11. Media queries: tablet (768px) y escritorio (1024px)
+
+   Estrategia mobile-first: las secciones 1 a 10 son el diseño para celular.
+   La sección 11 suma columnas a medida que crece el ancho de pantalla.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. Reset global
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Bootstrap vuelve a poner márgenes en estas etiquetas; se quitan otra vez
+   para que el espaciado siga dependiendo de gap y de las clases propias */
+h1,
+h2,
+h3,
+p,
+ul,
+figure,
+address {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ==========================================================================
+   2. Paleta de colores
+   ========================================================================== */
+
+:root {
+    --color-primario: #1f3a5f;    /* Azul marino: encabezado, pie y títulos */
+    --color-secundario: #2a6f97;  /* Azul medio: enlaces, etiquetas y degradado del hero */
+    --color-acento: #f2a541;      /* Ámbar: botón, bordes y estados activos */
+    --color-fondo: #f4f6f9;       /* Gris muy claro: fondo general */
+    --color-superficie: #ffffff;  /* Blanco: tarjetas y texto sobre azul */
+    --color-texto: #1e2a35;       /* Gris azulado oscuro: texto de lectura */
+
+    /* Bootstrap usa estas variables en sus componentes: toman la paleta propia */
+    --bs-body-color: var(--color-texto);
+    --bs-body-bg: var(--color-fondo);
+}
+
+
+/* ==========================================================================
+   3. Base y grilla maestra
+   ========================================================================== */
+
+/* Grilla maestra: una columna con tres áreas. La fila de main (1fr) toma el
+   alto libre, así el pie queda abajo aunque haya poco contenido */
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+    min-height: 100vh;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.site-header {
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+}
+
+.site-footer {
+    grid-area: footer;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* ==========================================================================
+   4. Tipografía
+   ========================================================================== */
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-primario);
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+a {
+    color: var(--color-secundario);
+    font-weight: 600;
+}
+
+
+/* ==========================================================================
+   5. Encabezado y navegación (navbar de Bootstrap)
+   ========================================================================== */
+
+.site-header {
+    background-color: var(--color-primario);
+}
+
+/* La navbar de Bootstrap se pinta con sus propias variables */
+.site-nav {
+    --bs-navbar-padding-x: 0.75rem;
+    --bs-navbar-padding-y: 0.75rem;
+    --bs-navbar-color: var(--color-superficie);
+    --bs-navbar-hover-color: var(--color-acento);
+    --bs-navbar-active-color: var(--color-acento);
+    --bs-navbar-brand-color: var(--color-superficie);
+    --bs-navbar-brand-hover-color: var(--color-acento);
+    --bs-navbar-brand-font-size: 1.5rem;
+    --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.6);
+}
+
+.site-nav .navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.site-nav .navbar-nav {
+    gap: 0.25rem 1rem;
+    padding-top: 0.5rem;
+}
+
+.site-nav .nav-link {
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+}
+
+.site-nav .nav-link.active {
+    border-bottom-color: var(--color-acento);
+}
+
+
+/* ==========================================================================
+   6. Presentación (hero)
+   ========================================================================== */
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding: 2.5rem 1.5rem;
+    background-color: var(--color-primario);
+    background-image: linear-gradient(135deg, #1f3a5f 0%, #2a6f97 100%);
+    color: var(--color-superficie);
+    text-align: center;
+}
+
+.hero-title {
+    color: var(--color-superficie);
+}
+
+.hero-text {
+    max-width: 40rem;
+    font-size: 1.125rem;
+}
+
+
+/* ==========================================================================
+   7. Contenedores, secciones y grilla del inicio
+   ========================================================================== */
+
+/* Contenedor propio: ancho máximo centrado, con aire a los costados */
+.wrapper {
+    max-width: 60rem;
+    margin: 0 auto 2.5rem;
+    padding: 0 1.5rem;
+}
+
+/* Cada sección apila sus hijos en columna; gap separa título, texto y tarjetas */
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Grilla del inicio. En celular: una columna, un área debajo de la otra */
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "info"
+        "tools"
+        "gallery"
+        "projects";
+    gap: 2.5rem;
+}
+
+.home-info {
+    grid-area: info;
+}
+
+.home-tools {
+    grid-area: tools;
+}
+
+.home-gallery {
+    grid-area: gallery;
+    min-width: 0;
+}
+
+.home-projects {
+    grid-area: projects;
+}
+
+
+/* ==========================================================================
+   8. Componentes: tarjetas, etiquetas, botón, galería, acordeón, listas, figuras, contacto
+   ========================================================================== */
+
+/* Contenedor de tarjetas. En celular: una columna */
+.card-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* Tarjeta: parte del componente card de Bootstrap y lo adapta al sitio */
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem; /* 24px */
+    background-color: var(--color-superficie);
+    border: 0;
+    border-left: 4px solid var(--color-acento);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(31, 58, 95, 0.12);
+}
+
+/* El botón de una tarjeta queda abajo y no se estira a todo el ancho */
+.card .btn {
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+/* Etiquetas de tecnologías (componente badge de Bootstrap) */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+}
+
+.tag {
+    background-color: var(--color-secundario);
+    font-weight: 600;
+}
+
+/* Botón: variante propia del componente btn de Bootstrap */
+.btn-acento {
+    --bs-btn-padding-x: 1.5rem;
+    --bs-btn-padding-y: 0.75rem;
+    --bs-btn-font-weight: 600;
+    --bs-btn-border-radius: 8px;
+    --bs-btn-color: var(--color-primario);
+    --bs-btn-bg: var(--color-acento);
+    --bs-btn-border-color: var(--color-acento);
+    --bs-btn-hover-color: var(--color-superficie);
+    --bs-btn-hover-bg: var(--color-primario);
+    --bs-btn-hover-border-color: var(--color-primario);
+    --bs-btn-active-color: var(--color-superficie);
+    --bs-btn-active-bg: var(--color-secundario);
+    --bs-btn-active-border-color: var(--color-secundario);
+    --bs-btn-focus-shadow-rgb: 242, 165, 65;
+}
+
+/* Galería (componente carousel de Bootstrap) */
+.gallery {
+    overflow: hidden;
+    background-color: var(--color-primario);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(31, 58, 95, 0.12);
+}
+
+.gallery .carousel-caption {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 2rem 1rem 2.25rem;
+    background-image: linear-gradient(180deg, rgba(31, 58, 95, 0) 0%, rgba(31, 58, 95, 0.92) 55%);
+}
+
+.gallery-title {
+    color: var(--color-superficie);
+}
+
+.gallery .gallery-indicator {
+    background-color: var(--color-acento);
+}
+
+/* Preguntas frecuentes (componente accordion de Bootstrap) */
+.faq {
+    --bs-accordion-color: var(--color-texto);
+    --bs-accordion-bg: var(--color-superficie);
+    --bs-accordion-border-color: rgba(31, 58, 95, 0.18);
+    --bs-accordion-border-radius: 8px;
+    --bs-accordion-inner-border-radius: 7px;
+    --bs-accordion-btn-color: var(--color-primario);
+    --bs-accordion-btn-bg: var(--color-superficie);
+    --bs-accordion-active-color: var(--color-superficie);
+    --bs-accordion-active-bg: var(--color-primario);
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem rgba(242, 165, 65, 0.6);
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%231f3a5f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    box-shadow: 0 2px 6px rgba(31, 58, 95, 0.12);
+    border-radius: 8px;
+}
+
+.faq .accordion-button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 600;
+}
+
+/* Listas de contenido */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1.25rem;
+}
+
+/* Figuras */
+.figure-img {
+    display: block;
+    margin-bottom: 0;
+    border-radius: 8px;
+}
+
+.figure-caption {
+    margin-top: 0.5rem;
+    color: inherit;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Datos de contacto */
+.contact-address {
+    font-style: normal;
+}
+
+
+/* ==========================================================================
+   9. Pie de página
+   ========================================================================== */
+
+.site-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 1.5rem;
+    background-color: var(--color-primario);
+    color: var(--color-superficie);
+    text-align: center;
+}
+
+.footer-copy {
+    font-size: 0.9rem;
+}
+
+.social-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.social-link {
+    color: var(--color-acento);
+}
+
+
+/* ==========================================================================
+   10. Estados interactivos y transiciones
+   ========================================================================== */
+
+/* Enlaces de texto */
+a {
+    transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--color-primario);
+}
+
+a:active {
+    color: var(--color-texto);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--color-acento);
+    outline-offset: 2px;
+}
+
+/* Marca y enlaces de la navbar */
+.site-nav .navbar-brand {
+    transition: color 0.2s ease;
+}
+
+.site-nav .nav-link {
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-nav .nav-link:hover,
+.site-nav .nav-link:focus {
+    border-bottom-color: var(--color-acento);
+}
+
+.site-nav .nav-link:focus-visible {
+    box-shadow: 0 0 0 0.2rem rgba(242, 165, 65, 0.6);
+}
+
+.site-nav .nav-link:active {
+    color: var(--color-superficie);
+    border-bottom-color: var(--color-superficie);
+}
+
+/* Botones */
+.btn-acento {
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.btn-acento:hover,
+.btn-acento:focus {
+    transform: translateY(-2px);
+}
+
+.btn-acento:active {
+    transform: translateY(0) scale(0.97);
+}
+
+/* Tarjetas: :focus-within las resalta cuando el foco está en un enlace interno */
+.card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover,
+.card:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(31, 58, 95, 0.2);
+}
+
+.card:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(31, 58, 95, 0.16);
+}
+
+/* Galería: indicadores y flechas */
+.gallery .gallery-indicator {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.gallery .gallery-indicator:hover,
+.gallery .gallery-indicator:focus {
+    opacity: 1;
+    transform: scaleY(1.6);
+}
+
+.gallery .gallery-indicator:active {
+    background-color: var(--color-superficie);
+}
+
+.gallery .carousel-control-prev:focus-visible,
+.gallery .carousel-control-next:focus-visible {
+    outline: 2px solid var(--color-acento);
+    outline-offset: -4px;
+}
+
+.gallery .carousel-control-prev:active,
+.gallery .carousel-control-next:active {
+    opacity: 1;
+    background-color: rgba(31, 58, 95, 0.35);
+}
+
+/* Preguntas frecuentes: botones del acordeón */
+.faq .accordion-button.collapsed:hover,
+.faq .accordion-button.collapsed:focus {
+    background-color: var(--color-fondo);
+    color: var(--color-secundario);
+}
+
+.faq .accordion-button:active {
+    background-color: var(--color-secundario);
+    color: var(--color-superficie);
+}
+
+/* Enlaces del pie */
+.social-link:hover,
+.social-link:focus {
+    color: var(--color-superficie);
+}
+
+.social-link:active {
+    color: var(--color-acento);
+}
+
+
+
